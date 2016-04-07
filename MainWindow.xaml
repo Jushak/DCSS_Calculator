@@ -1,0 +1,105 @@
+﻿<Window x:Class="DCSS_Calculator.MainWindow"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:namespace="clr-namespace:Xceed.Wpf.Toolkit.Core;assembly=Xceed.Wpf.Toolkit"
+        xmlns:ViewModels="clr-namespace:DCSS_Calculator.ViewModels"
+        Title="MainWindow" Height="640" Width="860">
+    
+    <Window.DataContext>
+        <ViewModels:ViewModel />
+    </Window.DataContext>
+    
+    <StackPanel Margin="10" Orientation="Horizontal">
+        <StackPanel Width="530">
+            <Label FontWeight="Bold" Content="Characteristics" />
+            <StackPanel Margin="10" Orientation="Horizontal">
+                <Label Content="Race"/>
+                <ComboBox x:Name="raceComboBox" Width="80"
+                          ItemsSource="{Binding races}"
+                          SelectedIndex="0"
+                          SelectedValue="{Binding SelectedRace}"/>
+                <Label Content="Level" />
+                <xctk:SingleUpDown Value="{Binding LevelValue}" Minimum="1" Maximum="27" TextAlignment="Center" />
+            </StackPanel>
+            <Label FontWeight="Bold" Content="Attributes"/>
+            <StackPanel Margin="10"  Orientation="Horizontal">
+                <Label Content="Strength"/>
+                <xctk:SingleUpDown Value="0" Minimum="0" Maximum="100" TextAlignment="Center"/>
+                <Label Content="Dexterity"/>
+                <xctk:SingleUpDown Value="0" Minimum="0" Maximum="100" TextAlignment="Center"/>
+                <Label Content="Intelligence"/>
+                <xctk:SingleUpDown Value="0" Minimum="0" Maximum="100" TextAlignment="Center"/>
+            </StackPanel>
+            <Label FontWeight="Bold" Content="Gear"/>
+            <StackPanel Margin="10" Orientation="Horizontal">
+                <Label Content="Armour"/>
+                <ComboBox x:Name="armourComboBox" Width="100" ClipToBounds="True" ItemsSource="{Binding armours}" SelectedIndex="0" SelectedItem="{Binding SelectedArmour}"/>
+                <Label Content="Weapon"/>
+                <ComboBox x:Name="weaponComboBox" Width="100" ClipToBounds="True" ItemsSource="{Binding weapons}" SelectedIndex="0" SelectedItem="{Binding SelectedWeapon}"/>
+                <Label Content="Shield"/>
+                <ComboBox x:Name="shieldComboBox" Width="100" ClipToBounds="True" ItemsSource="{Binding shields}" SelectedIndex="0" SelectedItem="{Binding SelectedShield}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox VerticalAlignment="Center" Margin="10" Content="Helmet" IsChecked="{Binding HelmetOn}" IsEnabled="{Binding AllowHelmet, Mode=OneWay}"/>
+                <CheckBox VerticalAlignment="Center" Margin="10" Content="Gloves" IsChecked="{Binding GlovesOn}" IsEnabled="{Binding AllowGloves, Mode=OneWay}"/>
+                <CheckBox VerticalAlignment="Center" Margin="10" Content="Boots" IsChecked="{Binding BootsOn}" IsEnabled="{Binding AllowBoots, Mode=OneWay}"/>
+                <CheckBox VerticalAlignment="Center" Margin="10" Content="Cloak" IsChecked="{Binding CloakOn}"/>
+                <CheckBox VerticalAlignment="Center" Margin="10" Content="Barding" IsEnabled="{Binding AllowBarding, Mode=OneWay}" IsChecked="{Binding BardingOn}"/>
+                <Label VerticalAlignment="Center" Content="Enchantment total"/>
+                <xctk:SingleUpDown x:Name="enchantmentUpDown" Value="{Binding EnchantValue}" Minimum="-100" Maximum="100" TextAlignment="Center"/>
+            </StackPanel>
+            <Label FontWeight="Bold" Content="Combat skills"/>
+            <StackPanel Margin="10" Orientation="Horizontal">
+                <Label Content="Weapon"/>
+                <xctk:SingleUpDown x:Name="weaponUpDown" Value="{Binding WeaponValue}" Minimum="0" Maximum="27" TextAlignment="Center"/>
+                <Label Content="Armour"/>
+                <xctk:SingleUpDown x:Name="armourUpDown" Value="{Binding ArmourValue}" Minimum="0" Maximum="27" TextAlignment="Center"/>
+                <Label Content="Shield"/>
+                <xctk:SingleUpDown x:Name="shieldUpDown" Value="{Binding ShieldValue}" Minimum="0" Maximum="27" TextAlignment="Center"/>
+                <Label Content="Dodging"/>
+                <xctk:SingleUpDown x:Name="dodgingUpDown" Value="{Binding DodgeValue}" Minimum="0" Maximum="27" TextAlignment="Center"/>
+            </StackPanel>
+            <Label FontWeight="Bold" Content="Magical skills"/>
+            <StackPanel Margin="10" Orientation="Horizontal">
+                <Label Content="Spellcasting"/>
+                <xctk:SingleUpDown x:Name="castingUpDown" Value="{Binding CastingValue}" Minimum="0" Maximum="27" TextAlignment="Center"/>
+                <Label Content="School #1"/>
+                <xctk:SingleUpDown x:Name="school1UpDown" Value="{Binding School1Value}" Minimum="0" Maximum="27" TextAlignment="Center"/>
+                <Label Content="School #2"/>
+                <xctk:SingleUpDown x:Name="school2UpDown" Value="{Binding School2Value}" Minimum="0" Maximum="27" TextAlignment="Center"/>
+                <Label Content="School #3"/>
+                <xctk:SingleUpDown x:Name="school3UpDown" Value="{Binding School3Value}" Minimum="0" Maximum="27" TextAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Margin="10" Orientation="Horizontal">
+                    <Label  Content="Number of Schools in the spell"/>
+                    <xctk:SingleUpDown Value="{Binding SchoolsUsed}" Minimum="1" Maximum="3" TextAlignment="Center"/>
+                    <Label Content="Spell level" />
+                    <xctk:SingleUpDown Value="{Binding SpellLevelValue}" Minimum="1" Maximum="9" TextAlignment="Center"/>
+            </StackPanel>
+            <Label FontWeight="Bold" Content="Miscellanous"/>
+            <StackPanel Margin="10" Orientation="Horizontal">
+                <CheckBox Margin="10" Content="Speed-branded weapon"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"/>
+        </StackPanel>
+        <StackPanel Width="305">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Label Margin="10" FontWeight="Bold" Content="Combat statistics:"/>
+                </StackPanel>
+
+                <StackPanel DockPanel.Dock="Left">
+                    <TextBlock><Run Text="Total AC"/></TextBlock>
+                    <TextBlock><Run Text="Guaranteed damage reduction"/></TextBlock>
+                    <TextBlock><Run Text="Spell failure chance"/></TextBlock>
+                </StackPanel>
+                <StackPanel DockPanel.Dock="Right">
+                    <TextBlock HorizontalAlignment="Center" Text="{Binding TotalAC}" ></TextBlock>
+                    <TextBlock HorizontalAlignment="Center" ><Run Text="%"/></TextBlock>
+                    <TextBlock HorizontalAlignment="Center" ><Run Text="%"/></TextBlock>
+                </StackPanel>
+            </DockPanel>
+        </StackPanel>
+    </StackPanel>
+</Window>
